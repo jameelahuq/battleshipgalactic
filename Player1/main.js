@@ -7,35 +7,59 @@ $(document).ready(init);
 
 
 function init(){
-  $(".makeBoardButton").click(displayGameBoard);
-
   var gameBoard = new Firebase('https://battleshipgames.firebaseio.com/');
-
-
+  var $gameBoard = $('.gameBoard');
+  var $myGameBoard = $('.myGameBoard');
+  var $theirGameBoard = $('.theirGameBoard');
   var row;
   var col;
+
+  $(".resetButton").on("click",clearDB);
   $(".startGame").on("click", sendUpdatedData);
   $("#myGameBoard").on("click",".tile",selectShipPlace);
   $("#theirGameBoard").on("click", ".tile", opponentTileClicked);
+  $(".makeBoardButton").click(makeGameBoard);
+
+  makeGameBoard();
+
+  function clearDB(){
+    var array1 = [];
+    var array2 = ["","","","","","","","","",""];
+    for(var i =0; i<10;i++){
+      array1.push(array2);
+    }
+    console.log(array1);
+    gameBoard.set({"player1" :array1,"player2" :array1, "row":"null", "col":"null"});
+    console.log("DataBase Reset");
+  }
+
+  function makeGameBoard(){
+    $gameBoard.empty();
+    $myGameBoard.val("My Galaxy");
+    $theirGameBoard.val("Opponent's Galaxy");
+    clearDB();
+    for (var j= 0; j < 10; j++) {
+      var rowArray = [];
+      $gameBoard.append('<div class="row" data-row=' + j +'></div>');
+      for (var i = 0; i < 10; i++) {
+        rowArray.push('<div class="tile" data-col=' + i + '></div>');
+      }
+      $gameBoard.find('.row:last').append(rowArray);
+    }
+  }
+
   function sendUpdatedData (row,col) {
-    console.log("Did I go to soon >_<!");
-    //var oldBoard = battleshipFirebaseData;
     gameBoard.child('player1').child(row).child(col).update({ship: true, status: 'njmk'});
   }
 
   function selectShipPlace(){
     var tile = $(this);
-    tile.css("background-color","red");
+    tile.addClass('shipIsHere');
     var rowSelected = tile.closest('.row').data('row');
     var colSelected = tile.data('col');
-    console.log(rowSelected);
-    console.log(colSelected);
     sendUpdatedData(rowSelected,colSelected);
   }
 }
-
-
-
 
 function opponentTileClicked(){
   var tile = $(this);
@@ -45,10 +69,10 @@ function opponentTileClicked(){
   console.log(rowSelected);
   console.log(colSelected);
   isShipHit(rowSelected,colSelected, function(isShip) {
-    if(!isShip)
-      tile.css("background-color","white");
+    if(isShip)
+      tile.addClass('hit');
     else
-      tile.css("background-color","red");
+      tile.addClass('miss');
   });
 }
 
@@ -83,28 +107,4 @@ function shipHit(){
   //
 }
 
-function displayGameBoard() {
-  $('.shipStation').addClass('docked');
-  var $gameBoard = $('.gameBoard');
-  for (var j = 0; j < 10; j++) {
-    var rowArray = [];
-    $gameBoard.append('<div class="row" data-row=' + j + '></div>');
-    for (var i = 0; i < 10; i++) {
-      rowArray.push('<div class="tile" data-col=' + i + '></div>');
-    }
-    $gameBoard.find('.row:last').append(rowArray);
-  }
-}
 
-
-//function createDB(){
-//   var myDataRef = getFirebaseData();
-//         var array1 = [];
-//         var array2 = ["","","","","","","","","",""];
-//         for(var i =0; i<10;i++){
-//             array1.push(array2);
-//         }
-//         console.log(array1);
-//         myDataRef.update({"player1" :array1,"player2" :array1});
-//   console.log("child added");
-// }

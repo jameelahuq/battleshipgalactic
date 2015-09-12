@@ -3,10 +3,30 @@
 <head>
 	<meta charset="UTF-8">
 	<title>BattleShip</title>
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<!-- <link rel="stylesheet" href="bootstrap.css"> -->
+	<link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="background">
 	<h1>BattleShip</h1>
-	<div class="container player1"></div>
-	<div class="container player2"></div>
+	<button class="resetButton">Reset Game</button>
+	<button class="btn makeBoardButton">Create/Empty Board</button>
+	<div id="gameArea" class="container">
+		<div id="theirGameBoard" class="block gameBoard">Opponent's Galaxy</div>
+		<div class="spaceCol"></div>
+		<div id="myGameBoard" class="block gameBoard"> Your Galaxy</div>
+		<!-- <div class="block contain">Ship Station -->
+			<div class="shipStation">
+				<!-- <img src="" alt="" class="img1">
+				<img src="" alt="" class="img2">
+				<img src="" alt="" class="img3">
+				<img src="" alt="" class="img4"> -->
+			</div>
+		<!-- </div> -->
+	</div>
+	<button class="btn startGame">Start Game</button>
+	
+	<script src='../jquery.js'></script>
+	<script src="main.js"></script>
 </body>
 </html>
