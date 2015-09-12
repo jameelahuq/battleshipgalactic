@@ -2,22 +2,62 @@
  * Created by Dagli on 9/11/15.
  */
 $(document).ready(init);
+
+
 function init(){
+  var gameBoard = new Firebase('https://battleshipgames.firebaseio.com/');
+  var rowClicked = new Firebase('https://battleshipgames.firebaseio.com/row');
+  var colClicked = new Firebase('https://battleshipgames.firebaseio.com/col');
+
   //var battleshipFirebaseData = getFirebaseData();
-  var lastMove = sendUpdatedData();
+  //var lastMove =
   //$(".startButton").click(displayGameBoard);
-  //$(".startGame").on("click", sendUpdatedData);
+  var row;
+  var col;
+  $(".startGame").on("click", sendUpdatedData);
+  $(".pretendShip").on("click", getPositionofTileClick);
+  getPositionofTileClick();
 
-  getUpdatedData(lastMove);
+  function sendUpdatedData () {
+    console.log("Did I go to soon >_<!");
+    //var oldBoard = battleshipFirebaseData;
+    gameBoard.child('player1').child(row).child(col).update({ship: false, status: 'pinak'});
+  }
 
+  function getPositionofTileClick() {
+    console.log("Button clicked!!");
+    //row = 0;
+    //col = 0;
+    rowClicked.on('value', function(snapshot) {
+      console.log("Row clicked!!" + snapshot.val());
+      row = snapshot.val();
+    });
+
+    colClicked.on('value', function(snapshot) {
+      console.log("Col clicked!!" + snapshot.val());
+      col = snapshot.val();
+    });
+    getUpdatedData(row, col);
+  }
+
+  function getUpdatedData(row, col){
+    console.log("get get get get");
+    var gamePiece = new Firebase('https://battleshipgames.firebaseio.com/player1/'+ row + '/' + col);
+    gamePiece.on('child_changed', function(snapshot) {
+      console.log(snapshot.val());
+      return snapshot.val();
+    });
+  }
   //$(".row").on("click",".rowElement",cellClicked);
   //$(".imagePlaced").on("click",".rowElement",cellClicked)
 }
+
 function cellClicked(){
   //when cell clicked 
   //1.check if hit call shipHit
   //2.send data back  --- call sendUpdatedData
 }
+
 function shipHit(){
   //check if hit
   //change class to red
@@ -37,21 +77,9 @@ function shipHit(){
 //  }
 //}
 
-function getUpdatedData(lastMove){
-  var battleshipFirebaseData = getFirebaseData();
-   battleshipFirebaseData.on('child_changed', function(snapshot, lastMove) {
-     console.log(snapshot.val());
-     console.log("the child key???: " + lastMove);
-     return snapshot.val();
-  });
-}
 
-function sendUpdatedData() {
-  var battleshipFirebaseData = getFirebaseData();
-  var oldBoard = battleshipFirebaseData;
-  battleshipFirebaseData.child('player1').child(5).child(7).update({ship: false, status: 'miss'});
-  return oldBoard;
-}
+
+
 
 function getFirebaseData(){
   return new Firebase('https://battleshipgames.firebaseio.com/');
