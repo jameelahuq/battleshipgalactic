@@ -3,12 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>BattleShip</title>
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<h1>BattleShip</h1>
-	<div class="container player1"></div>
-	<div class="container player2"></div>
+	<div id="gameArea">
+		<div id="myGameBoard" class="gameBoard"> Your Galaxy</div>
+		<div id="theirGameBoard" class="gameBoard"> Opponent's Galaxy</div>
+	</div>
+	<button class="button">click</button>
 	<script src="main.js"></script>
 </body>
 </html>
