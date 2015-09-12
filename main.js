@@ -7,9 +7,6 @@ $(function() {
 });
 
 
-
-
-
 function init() {
   console.log("Hello World!");
   var boardSize = 10;
