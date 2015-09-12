@@ -1,7 +1,8 @@
 .row div {
- border: 3px solid green;
- width: 45px;
- height: 45px;
+ border: 1px solid darkorange;
+  outline: 1px solid darkorange;
+ width: 55px;
+ height: 55px;
  display: inline-block;
 }
 h1 {
@@ -16,16 +17,15 @@ h1 {
 }
 .row {
  margin: 0px;
- width: auto;
- height: auto;
 }
 .background {
 	background-image: url('background.jpg');
 }
-.shipStation {
-	width: 380px;
-	height: 547px;
+.docked {
+	width: 570px;
+	height: 70px;
 	border: 3px solid green;
+  display: block;
 }
 .block {
 	display: inline-block;
