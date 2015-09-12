@@ -41,7 +41,7 @@ function getUpdatedData(lastMove){
   var battleshipFirebaseData = getFirebaseData();
    battleshipFirebaseData.on('child_changed', function(snapshot, lastMove) {
      console.log(snapshot.val());
-     console.log("the child key???: " + oldBoard);
+     console.log("the child key???: " + lastMove);
      return snapshot.val();
   });
 }
