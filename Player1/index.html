@@ -4,18 +4,46 @@
 	<meta charset="UTF-8">
 	<title>BattleShip</title>
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<!-- <link rel="stylesheet" href="bootstrap.css"> -->
 	<link rel="stylesheet" href="../style.css">
 </head>
 <body class="background">
-	<h1>BattleShip</h1>
-	<button class="btn startGame">Send updated data</button>
-	<button class="btn restartGame">Restart Game</button>
-	<button class="btn makeBoardButton">Create game board</button>
-	<div id="gameArea" class="container">
-		<div id="theirGameBoard" class="block gameBoard">Opponent's Galaxy</div>
-		<div class="spaceCol"></div>
-		<div id="myGameBoard" class="block gameBoard"> Your Galaxy</div>
+<header>
+  <h1>BattleShip Galactic</h1>
+  <h2 class = "playerName"></h2>
+  <button class="btn makeBoardButton">Start/Restart Game</button>
+</header>
+
+<!-- Modal -->
+<div class="container">
+	<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">OK!!</button>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+
+  <div class="gameArena" id="myArena">
+    <h2 class="boardName">My Galaxy</h2>
+    <div id="myGameBoard" class="gameBoard"></div>
+  </div>
+
+  <div class="gameArena" id="theirArena">
+    <h2 class="boardName">Opponent's Galaxy</h2>
+    <div id="theirGameBoard" class="gameBoard"></div>
+  </div>
+
 		<!-- <div class="block contain">Ship Station -->
 			<div class="shipStation">
 				<!-- <img src="" alt="" class="img1">
@@ -24,14 +52,10 @@
 				<img src="" alt="" class="img4"> -->
 			</div>
 		<!-- </div> -->
-	</div>
 
-	
-	<script src='jquery.js'></script>
-
-	<button class="startGame">click</button>
-	<button class="pretendShip">pretend ship</button>
-
+	<button class="startGame">I'm Ready!</button>
+	<script src='../jquery.js'></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="main.js"></script>
 </body>
 </html>
