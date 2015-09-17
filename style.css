@@ -59,6 +59,20 @@ h1, h2{
   background-image: url('images/rocket3.png');
   background-size: 100%;
 }
+
 .hidden {
   display: none;
+}
+
+.fire {
+  width: 80%;
+  z-index: 1;
+}
+.fires {
+  font-size:150px;
+  z-index: -1;
+  color: yellow;
+  position: absolute;
+  text-align: center;
+  top:40%;
 }

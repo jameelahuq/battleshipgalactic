@@ -122,16 +122,15 @@ function init(){
     console.log(rowSelected);
     console.log(colSelected);
     isShipHit(rowSelected, colSelected,function(isShip){
-      if(isShip) {
+      if(isShip.ship && isShip.status === "null" ) {
         tile.addClass('hit');
         gameBoard.child(opponent).child(rowSelected).child(colSelected).update({status: 'HIT'});
         opponentShips--;
-        if(opponentShips ===0) {
-          $(".modal-title").text("Congratulation!!! you've conquered the battle");
-          $('#myModal').modal({
-            show: 'false'
-          });
-          $gameBoard.addClass("done");
+        console.log("These should be the remaining ship of p2: " +opponentShips);
+        if(opponentShips === 0) {
+          $('#gameArea').hide();
+          $('.image').prepend('<img src="../images/Fireworks.gif" class="fire">');
+          $('.image').prepend('<div class="fires">YOU WIN!!!!</div>');
         }
       } else {
         tile.addClass('miss');
@@ -144,8 +143,8 @@ function init(){
     console.log("passed"+row+" "+col);
     var gamePiece = new Firebase('https://battleshipgames.firebaseio.com/'+opponent+'/'+ row + '/' + col);
     gamePiece.on('value', function(snapshot) {
-      console.log("ship "+snapshot.val().ship);
-      callback(snapshot.val().ship);
+      console.log("ship "+snapshot.val().ship + "status " + snapshot.val().status);
+      callback(snapshot.val());
     });
   }
 };//end of init
